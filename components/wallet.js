@@ -2,12 +2,14 @@ import Col from 'react-bootstrap/Col';
 import Card from 'react-bootstrap/Card';
 import ListGroup from 'react-bootstrap/ListGroup';
 import Button from 'react-bootstrap/Button';
+import ButtonGroup from 'react-bootstrap/ButtonGroup';
 import CloseButton from 'react-bootstrap/CloseButton';
+import Spinner from 'react-bootstrap/Spinner';
 
 import { useEffect, useState } from 'react';
 
 const Wallet = (props) => {
-    const { wallet, formatter, handleDelete, handleScramble } = props;
+    const { loading, wallet, formatter, handleDelete, handleScramble, handleClear } = props;
 
     const [ total, setTotal ] = useState(0);
 
@@ -15,7 +17,7 @@ const Wallet = (props) => {
         if (wallet.length) {
             let newTotal=0;
             wallet.forEach(cash => {
-                newTotal+=parseFloat(cash.amount);
+                newTotal+=cash.float;
             })
             setTotal(newTotal);
         } else {
@@ -31,9 +33,18 @@ const Wallet = (props) => {
                         <i className="bi bi-wallet2"></i> Wallet
                     </h1>
                     { total > 0 && 
-                        <Button type="button" variant="outline-secondary" onClick={() => handleScramble()}>
-                            <i className="bi bi-dice-3-fill"></i> Scramble
-                        </Button> 
+                        <ButtonGroup>
+                            <Button type="button" variant="outline-secondary" onClick={() => handleClear()}>
+                                <i className="bi bi-stars"></i> Clear
+                            </Button> 
+                            <Button type="button" variant="outline-secondary" onClick={() => handleScramble()}>
+                                { loading ? 
+                                    <Spinner animation="border" variant="light" size="sm" /> :
+                                    <i className="bi bi-dice-3-fill"></i>
+                                }
+                                {' '}Scramble
+                            </Button> 
+                        </ButtonGroup>
                     }
                 </Card.Header>
                 <Card.Body className="p-0">
@@ -47,7 +58,7 @@ const Wallet = (props) => {
                                                 {i+1}.
                                             </div>
                                             <code>{cash.amount}</code>
-                                            <CloseButton type="button" className="ms-4" aria-label="Close" onClick={() => handleDelete(cash.id)}></CloseButton>
+                                            <CloseButton type="button" className="ms-3" aria-label="Close" onClick={() => handleDelete(cash.id)}></CloseButton>
                                         </ListGroup.Item>
                                     )
                                 } 

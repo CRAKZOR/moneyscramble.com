@@ -12,7 +12,8 @@ const ScrambleForm = (props) => {
 
     const defaultForm = {
         id: (new Date()).getTime().toString(36) + Math.random().toString(36).slice(2),
-        amount: ''
+        amount: '',
+        float: 0,
     }
 
     // const randomDollar = Math.floor(Math.random() * 190 + 10);
@@ -32,12 +33,14 @@ const ScrambleForm = (props) => {
         <Form onSubmit={onSubmit} className="justify-content-center gy-3">
             <Col>
                 <InputGroup className="justify-content-center">
-                    <InputGroup.Text id="form-amount-prepend">$</InputGroup.Text>
+                    {/* <InputGroup.Text id="form-amount-prepend">$</InputGroup.Text> */}
                     <FloatingLabel
                         controlId="form-amount"
                         label={placeholder}
                     >
                         <Form.Control
+                            autoFocus
+                            disabled={loading}
                             as={CurrencyInput}
                             size="lg"
                             type="text"
@@ -45,11 +48,12 @@ const ScrambleForm = (props) => {
                             name="amount"
                             placeholder={placeholder}
                             value={form.amount}
-                            onValueChange={(value, name) => setForm({ ...form, [name]: value })}
+                            onValueChange={(value, name, obj) => setForm({ ...form, [name]: value, float: obj.float })}
+                            step={10}
                         />
                     </FloatingLabel>
-                    <Button type="submit" variant="primary" id="form-amount-prepend">
-                        Add To Wallet
+                    <Button type="submit" variant="primary" id="form-amount-prepend" disabled={loading}>
+                        Add
                     </Button>
                 </InputGroup>
             </Col>

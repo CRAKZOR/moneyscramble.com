@@ -1,19 +1,22 @@
 {
-    "name": "Money Scrambler",
-    "short_name": "Money Scrambler",
+    "name": "Money Scramble",
+    "short_name": "Money Scramble",
+    "start_url": "/",
+    "theme_color": "#212529",
+    "background_color": "#212529",
     "icons": [
         {
             "src": "/android-chrome-192x192.png",
             "sizes": "192x192",
-            "type": "image/png"
+            "type": "image/png",
+            "purpose": "any maskable"
         },
         {
             "src": "/android-chrome-512x512.png",
             "sizes": "512x512",
-            "type": "image/png"
+            "type": "image/png",
+            "purpose": "any maskable"
         }
     ],
-    "theme_color": "#16d421",
-    "background_color": "#16d421",
     "display": "standalone"
 }
