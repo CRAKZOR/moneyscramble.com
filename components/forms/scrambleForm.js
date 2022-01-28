@@ -18,7 +18,7 @@ const ScrambleForm = (props) => {
 
     // const randomDollar = Math.floor(Math.random() * 190 + 10);
     // const randomCents = Math.floor(Math.random() * 90 + 10);
-    const placeholder = `Enter an amount, ex: 100.50`
+    const placeholder = `Enter an amount`
 
     const [ form, setForm ] = useState(defaultForm);
 
@@ -33,7 +33,6 @@ const ScrambleForm = (props) => {
         <Form onSubmit={onSubmit} className="justify-content-center gy-3">
             <Col>
                 <InputGroup className="justify-content-center">
-                    {/* <InputGroup.Text id="form-amount-prepend">$</InputGroup.Text> */}
                     <FloatingLabel
                         controlId="form-amount"
                         label={placeholder}
@@ -52,7 +51,10 @@ const ScrambleForm = (props) => {
                             step={10}
                         />
                     </FloatingLabel>
-                    <Button type="submit" variant="primary" id="form-amount-prepend" disabled={loading}>
+                    <Button type="submit" variant="primary" id="form-amount-prepend" className="d-none d-sm-block" d-disabled={loading}>
+                        Add To Wallet
+                    </Button>
+                    <Button type="submit" variant="primary" id="form-amount-prepend" className="d-sm-none" d-disabled={loading}>
                         Add
                     </Button>
                 </InputGroup>

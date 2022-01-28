@@ -127,6 +127,7 @@ const Home = (props) => {
         />
       </Row>
       <Row className="justify-content-center g-3 text-center">
+
         <Wallet
           wallet={wallet}
           formatter={formatter}
