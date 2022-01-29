@@ -1,4 +1,3 @@
-
 import { useEffect, useState } from 'react';
 
 import Container from 'react-bootstrap/Container';
@@ -23,77 +22,66 @@ const Home = (props) => {
 
   const [ loading, setLoading ] = useState(false);
 
-  useEffect(() => {
-    if (loading) {
-      
-      const scrambleMoney = () => {
+  const scrambleMoney = () => {
 
-        const sortedWallet = [...wallet].sort((a,b) => {
+    const sortedWallet = [...wallet].sort((a,b) => {
+      return a.float - b.float;
+    });
+
+    let average = 0
+    sortedWallet.forEach(e => { average+= e.float })
+    average=Math.floor(average/sortedWallet.length);
+
+    const getRandomAmount = (amt) => {
+
+      const randomDiff = Math.round( ( ( Math.random() * ( sortedWallet[0].float/8 ) ) + sortedWallet[0].float/2)*100)/100;
+      const randomizedAmnt=Math.round((amt-randomDiff)*100)/100;
+
+      return randomizedAmnt;
+    }
+
+    let total = 0;
+    let newTotal = 0;
+    let newWallet = [];
+
+    for (const [i, cash] of sortedWallet.entries()) {
+      total+=cash.float;
+
+      const newAmount = getRandomAmount(cash.float);
+      newTotal+=newAmount;
+      newWallet.push({
+        ...cash,
+        amount: formatter.format(newAmount),
+        float: newAmount
+      });
+
+      if (i === (sortedWallet.length-1)) {
+        const totalDiff = Math.round((total-newTotal)*100)/100;
+        newTotal+=totalDiff;
+        newWallet.sort((a,b) => {
           return a.float - b.float;
         });
-    
-        let average = 0
-        sortedWallet.forEach(e => { average+= e.float })
-        average=Math.floor(average/sortedWallet.length);
-    
-        const getRandomAmount = (amt) => {
-          // let randomizedAmnt = 0;
-          // let balancer = 2;
-          // const threshold = amt*0.65;   // 50% of original amount 
-          // console.log(threshold);
-          // do {
-          //   const randomDiff = Math.round( ( ( Math.random() * ( sortedWallet[0].float/sortedWallet.length ) ) + sortedWallet[sortedWallet.length-1].float/balancer)*100)/100;
-          //   randomizedAmnt=Math.round((amt-randomDiff)*100)/100;
-          //   balancer++;
-          // } while (randomizedAmnt <= 0);
-    
-          const randomDiff = Math.round( ( ( Math.random() * ( sortedWallet[0].float/8 ) ) + sortedWallet[0].float/2)*100)/100;
-          const randomizedAmnt=Math.round((amt-randomDiff)*100)/100;
-    
-          return randomizedAmnt;
+        const updatedAmount = Math.round((newWallet[0].float + totalDiff)*100)/100;
+        newWallet[0]={
+          ...newWallet[0],
+          amount: formatter.format(updatedAmount),
+          float: updatedAmount
         }
-    
-        let total = 0;
-        let newTotal = 0;
-        let newWallet = [];
-    
-        for (const [i, cash] of sortedWallet.entries()) {
-          total+=cash.float;
-    
-          const newAmount = getRandomAmount(cash.float);
-          newTotal+=newAmount;
-          newWallet.push({
-            ...cash,
-            amount: formatter.format(newAmount),
-            float: newAmount
-          });
-    
-          if (i === (sortedWallet.length-1)) {
-            const totalDiff = Math.round((total-newTotal)*100)/100;
-            // const randomIndex = Math.floor(Math.random()*newWallet.length);
-            newTotal+=totalDiff;
-            newWallet.sort((a,b) => {
-              return a.float - b.float;
-            });
-            const updatedAmount = Math.round((newWallet[0].float + totalDiff)*100)/100;
-            newWallet[0]={
-              ...newWallet[0],
-              amount: formatter.format(updatedAmount),
-              float: updatedAmount
-            }
-    
-          }
-          setWallet(newWallet);
-          
-        }
-    
-      };
 
+      }
+      setWallet(newWallet);
+      
+    }
+
+  };
+
+  useEffect(() => {
+    if (loading) {
       // scramble money
       scrambleMoney();
       setLoading(false);
     }
-  }, [loading])
+  }, [loading]) // eslint-disable-line react-hooks/exhaustive-deps
 
   const addMoney = (form) => {
     form.amount = formatter.format(form.amount);
@@ -108,8 +96,6 @@ const Home = (props) => {
   const clearMoney = (id) => {
     setWallet([]);
   };
-
-
 
   return (
     <Container fluid>
@@ -139,7 +125,7 @@ const Home = (props) => {
           />
         ) : (
           <Col className="p-3 p-lg-5" md={8}>
-            <h1 className="display-6">Let's Start Scrambling</h1>
+            <h1 className="display-6">Let&apos;s Start Scrambling</h1>
             <p className="mb-0">Begin by adding funds from the form above. Funds will appear in a wallet. Funds can be scrambled! Continue to scramble! Scramble some more!</p>
           </Col>
         )}
