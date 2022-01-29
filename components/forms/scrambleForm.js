@@ -51,10 +51,10 @@ const ScrambleForm = (props) => {
                             step={10}
                         />
                     </FloatingLabel>
-                    <Button type="submit" variant="primary" id="form-amount-prepend" className="d-none d-sm-block" d-disabled={loading}>
+                    <Button type="submit" variant="primary" id="form-amount-prepend-1" className="d-none d-sm-block" d-disabled={loading}>
                         Add To Wallet
                     </Button>
-                    <Button type="submit" variant="primary" id="form-amount-prepend" className="d-sm-none" d-disabled={loading}>
+                    <Button type="submit" variant="primary" id="form-amount-prepend-2" className="d-sm-none" d-disabled={loading}>
                         Add
                     </Button>
                 </InputGroup>
