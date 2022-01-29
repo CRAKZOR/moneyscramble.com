@@ -24,7 +24,7 @@ const ScrambleForm = (props) => {
 
     const onSubmit = (e) => {
         e.preventDefault();
-        if (form.amount) {
+        if (form.amount && form.float) {
             handleSubmit(form);
             setForm(defaultForm);
         }

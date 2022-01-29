@@ -71,7 +71,7 @@ const Wallet = (props) => {
                 <Card.Footer className="text-muted small">
                     { total ?
                         <Card.Text className="lead text-end">
-                            <span className="float-start">Total: </span>$ {formatter.format(total.toString())}
+                            <span className="float-start">Total: </span>{formatter.format(total.toString())}
                         </Card.Text> :
                         <em><small>Add money from the form above.</small></em>
                     }

@@ -112,7 +112,7 @@ const Home = (props) => {
 
   return (
     <Container fluid>
-      <Row className="justify-content-center text-center py-5 bg-light">
+      <Row className="justify-content-center text-center pt-5 pb-5 mb-3 bg-light">
         <Col xs={12}>
           <h1 className="display-4 text-capitalize">
             <i className="bi bi-currency-exchange"></i> {site.name}
@@ -127,15 +127,21 @@ const Home = (props) => {
         />
       </Row>
       <Row className="justify-content-center g-3 text-center">
-
-        <Wallet
-          wallet={wallet}
-          formatter={formatter}
-          handleDelete={removeMoney}
-          handleClear={clearMoney}
-          handleScramble={() => setLoading(true)}
-          loading={loading}
-        />
+        { wallet.length ? (
+          <Wallet
+            wallet={wallet}
+            formatter={formatter}
+            handleDelete={removeMoney}
+            handleClear={clearMoney}
+            handleScramble={() => setLoading(true)}
+            loading={loading}
+          />
+        ) : (
+          <Col className="p-3 p-lg-5" md={8}>
+            <h1 className="display-6">Let's Start Scrambling</h1>
+            <p>Begin by adding funds from the form above. Funds will appear in a wallet. Funds can be scrambled! Continue to scramble! Scramble some more!</p>
+          </Col>
+        )}
       </Row>
     </Container>
   )

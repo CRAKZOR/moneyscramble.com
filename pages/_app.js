@@ -47,7 +47,7 @@ function MyApp({ Component, pageProps }) {
 
       <footer className="d-flex bg-dark justify-content-center align-items-center text-capitalize text-muted small">
         <div><small>&copy;{moment().year()} {site.name.replace(" ", '')}.com</small></div>
-        <div className="position-absolute end-0 bottom-0 p-2"><small><small>alfredo sucks</small></small></div>
+        <div className="position-absolute end-0 bottom-0 p-2"><small><small>{"Alfredo<3"}</small></small></div>
       </footer>
       <style jsx>
         {`
