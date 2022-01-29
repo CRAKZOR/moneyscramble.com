@@ -1,7 +1,6 @@
 import '../styles/globals.css'
 
 import moment from 'moment';
-import styles from '../styles/Home.module.css'
 
 import Head from 'next/head';
 

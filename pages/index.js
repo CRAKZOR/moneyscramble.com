@@ -140,7 +140,6 @@ const Home = (props) => {
           <Col className="p-3 p-lg-5" md={8}>
             <h1 className="display-6">Let's Start Scrambling</h1>
             <p className="mb-0">Begin by adding funds from the form above. Funds will appear in a wallet. Funds can be scrambled! Continue to scramble! Scramble some more!</p>
-            <i className="bi bi-wallet" style={{fontSize: "2rem", color: "rgba(0, 0, 0, 0.33)"}}></i>
           </Col>
         )}
       </Row>
