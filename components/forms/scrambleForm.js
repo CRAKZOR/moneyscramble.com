@@ -39,7 +39,6 @@ const ScrambleForm = (props) => {
                     >
                         <Form.Control
                             autoFocus
-                            disabled={loading}
                             as={CurrencyInput}
                             size="lg"
                             type="text"
