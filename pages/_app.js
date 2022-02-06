@@ -1,8 +1,8 @@
-import '../styles/globals.css'
-
+import { DefaultSeo } from 'next-seo';
 import moment from 'moment';
-
 import Head from 'next/head';
+
+import '../styles/globals.css'
 
 function MyApp({ Component, pageProps }) {
 
@@ -10,6 +10,15 @@ function MyApp({ Component, pageProps }) {
     name: process.env.NEXT_PUBLIC_SITE_NAME,
     title: process.env.NEXT_PUBLIC_SITE_TITLE,
     description: process.env.NEXT_PUBLIC_SITE_DESCRIPTION
+  }
+
+  const metaTags = {
+    title: site.title,
+    name: site.name,
+    url: "https://moneyscramble.com",
+    imgUrl: "https://moneyscramble.com/static/og-image.jpg",
+    description: site.description,
+    locale: "en_US"
   }
 
 
@@ -36,6 +45,30 @@ function MyApp({ Component, pageProps }) {
         <link rel="mask-icon" href="/static/favicon/safari-pinned-tab.svg" color="#237b07"/>
         <meta name="msapplication-TileColor" content="#11d710"/>
       </Head>
+
+      <DefaultSeo
+        title = {metaTags.title}
+        titleTemplate = {`Money Scramble | %s`}
+        defaultTitle = {'Money Scramble'}
+
+        description={metaTags.description}
+        
+        openGraph={{
+          type: 'website',
+          locale: metaTags.locale,
+          url: metaTags.url,
+          site_name: metaTags.name,
+          description: metaTags.description,
+          images: [
+            {
+              url: metaTags.imgUrl,
+              width: 1200,
+              height: 627,
+              alt: 'MoneyScramble.com',
+            }
+          ]
+        }}
+      />
 
       <main id="content-wrap">
         <Component
